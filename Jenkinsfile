@@ -21,7 +21,34 @@ pipeline {
                 checkout scm
             }
         }
+        stage('Debug Full') {
+            steps {
+                sh '''
+                    echo "=== UTENTE ==="
+                    whoami
+                    id
 
+                    echo "=== PATH ==="
+                    echo $PATH
+
+                    echo "=== PODMAN BINARY ==="
+                    which podman
+                    file $(which podman)
+
+                    echo "=== LIBRERIE CARICATE DA PODMAN ==="
+                    ldd $(which podman)
+
+                    echo "=== LD_LIBRARY_PATH ==="
+                    echo $LD_LIBRARY_PATH
+
+                    echo "=== LIBSUBID SUL SISTEMA ==="
+                    find / -name "libsubid*" 2>/dev/null
+
+                    echo "=== LDCONFIG CACHE ==="
+                    ldconfig -p | grep subid
+                '''
+            }
+        }
         // 4. STAGE Build: costruisce l'immagine Docker
         stage('Build Image') {
             steps {
