@@ -10,11 +10,8 @@ pipeline {
         DOCKER_IMAGE   = "fabioviscusi/hello-world"
         DOCKER_TAG     = "${BUILD_NUMBER}"   // variabile Jenkins automatica
         REGISTRY_CREDS = credentials('dockerhub-credentials')  // ID credenziale Jenkins
-        LD_LIBRARY_PATH = "/usr/lib64:${env.LD_LIBRARY_PATH}"
     }
-
     stages {
-        
         // 3. STAGE Checkout: scarica il codice sorgente
         stage('Checkout') {
             steps {
@@ -56,7 +53,6 @@ pipeline {
                 sh "LD_LIBRARY_PATH=/usr/lib64 podman tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
             }
         }
-
         stage('Push to DockerHub') {
             steps {
                 sh "LD_LIBRARY_PATH=/usr/lib64 podman login docker.io -u ${REGISTRY_CREDS_USR} --password-stdin <<< ${REGISTRY_CREDS_PSW}"
