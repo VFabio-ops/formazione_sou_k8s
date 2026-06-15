@@ -10,7 +10,7 @@ pipeline {
         DOCKER_IMAGE   = "fabioviscusi/hello-world"
         DOCKER_TAG     = "${BUILD_NUMBER}"   // variabile Jenkins automatica
         REGISTRY_CREDS = credentials('dockerhub-credentials')  // ID credenziale Jenkins
-    }
+        }
 
         // 3. STAGE Checkout: scarica il codice sorgente
         stage('Checkout') {
