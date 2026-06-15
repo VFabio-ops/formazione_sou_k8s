@@ -36,8 +36,6 @@ pipeline {
             }
         }
 
-    }
-
     // 6. POST: cosa fare dopo, indipendentemente dall'esito
     post {
         always {
@@ -51,3 +49,4 @@ pipeline {
             echo "Pipeline fallita. Controlla i log sopra."
         }
     }
+}
