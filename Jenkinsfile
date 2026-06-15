@@ -12,6 +12,16 @@ pipeline {
         REGISTRY_CREDS = credentials('dockerhub-credentials')  // ID credenziale Jenkins
     }
 
+    stage('Debug Environment') {
+    steps {
+        sh "whoami"                                          // utente con cui gira Jenkins
+        sh "echo $PATH"                                      // PATH che vede Jenkins
+        sh "which podman || echo 'podman non trovato'"       // cerca podman
+        sh "ls /usr/bin/podman || echo 'non in /usr/bin'"   // controlla posizione comune
+        sh "ls /usr/local/bin/podman || echo 'non in /usr/local/bin'"
+    }
+}
+
     stages {
 
         // 3. STAGE Checkout: scarica il codice sorgente
