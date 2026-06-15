@@ -34,7 +34,6 @@ pipeline {
             steps {
                 sh "echo ${REGISTRY_CREDS_PSW} | podman login -u ${REGISTRY_CREDS_USR} --password-stdin"
                 sh "podman push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                sh "podman push ${DOCKER_IMAGE}:latest"
             }
         }
 
@@ -43,7 +42,7 @@ pipeline {
     // 6. POST: cosa fare dopo, indipendentemente dall'esito
     post {
         always {
-            sh "docker logout"
+            sh "podman logout"
             sh "podman rmi ${DOCKER_IMAGE}:${DOCKER_TAG} || true"  // pulizia immagini locali
         }
         success {
