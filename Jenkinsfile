@@ -24,8 +24,8 @@ pipeline {
         // 4. STAGE Build: costruisce l'immagine Docker
         stage('Build Image') {
             steps {
-                sh "docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
-                sh "docker tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
+                sh "podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                sh "podman tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
             }
         }
 
@@ -33,8 +33,8 @@ pipeline {
         stage('Push to DockerHub') {
             steps {
                 sh "echo ${REGISTRY_CREDS_PSW} | docker login -u ${REGISTRY_CREDS_USR} --password-stdin"
-                sh "docker push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                sh "docker push ${DOCKER_IMAGE}:latest"
+                sh "podman push ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                sh "podman push ${DOCKER_IMAGE}:latest"
             }
         }
 
@@ -44,7 +44,7 @@ pipeline {
     post {
         always {
             sh "docker logout"
-            sh "docker rmi ${DOCKER_IMAGE}:${DOCKER_TAG} || true"  // pulizia immagini locali
+            sh "podman rmi ${DOCKER_IMAGE}:${DOCKER_TAG} || true"  // pulizia immagini locali
         }
         success {
             echo "Build e push completati: ${DOCKER_IMAGE}:${DOCKER_TAG}"
