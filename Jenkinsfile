@@ -37,7 +37,7 @@ pipeline {
                 sh "podman push ${DOCKER_IMAGE}:latest"
             }
         }
-
+    }
     // 6. POST: cosa fare dopo, indipendentemente dall'esito
     post {
         always {
