@@ -41,7 +41,7 @@ pipeline {
     // 6. POST: cosa fare dopo, indipendentemente dall'esito
     post {
         always {
-            sh "podman logout"
+            sh "podman logout docker.io"
             sh "podman rmi ${DOCKER_IMAGE}:${DOCKER_TAG} || true"  // pulizia immagini locali
            }
         success {
