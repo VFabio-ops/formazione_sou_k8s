@@ -10,7 +10,7 @@ pipeline {
         DOCKER_IMAGE   = "fabioviscusi/hello-world"
         DOCKER_TAG     = "${BUILD_NUMBER}"   // variabile Jenkins automatica
         REGISTRY_CREDS = credentials('dockerhub-credentials')  // ID credenziale Jenkins
-        LD_LIBRARY_PATH = "/usr/lib/x86_64-linux-gnu:${env.LD_LIBRARY_PATH}"
+        LD_LIBRARY_PATH = "/usr/lib64:${env.LD_LIBRARY_PATH}"
     }
 
     stages {
