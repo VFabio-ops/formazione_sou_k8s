@@ -37,19 +37,18 @@ pipeline {
                 sh "podman push ${DOCKER_IMAGE}:latest"
             }
         }
-    
+    }
     // 6. POST: cosa fare dopo, indipendentemente dall'esito
-        post {
-            always {
-                sh "podman logout"
-                sh "podman rmi ${DOCKER_IMAGE}:${DOCKER_TAG} || true"  // pulizia immagini locali
-            }
-            success {
-                echo "Build e push completati: ${DOCKER_IMAGE}:${DOCKER_TAG}"
-            }
-            failure {
-                echo "Pipeline fallita. Controlla i log sopra."
-            }
+    post {
+        always {
+            sh "podman logout"
+            sh "podman rmi ${DOCKER_IMAGE}:${DOCKER_TAG} || true"  // pulizia immagini locali
+           }
+        success {
+            echo "Build e push completati: ${DOCKER_IMAGE}:${DOCKER_TAG}"
+        }
+        failure {
+            echo "Pipeline fallita. Controlla i log sopra."
         }
     }
 }
