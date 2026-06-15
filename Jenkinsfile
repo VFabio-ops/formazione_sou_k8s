@@ -51,4 +51,3 @@ pipeline {
             echo "Pipeline fallita. Controlla i log sopra."
         }
     }
-}
