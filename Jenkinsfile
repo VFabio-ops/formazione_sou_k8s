@@ -25,7 +25,7 @@ pipeline {
         // 4. STAGE Build: costruisce l'immagine Docker
         stage('Build Image') {
             steps {
-                sh "LD_LIBRARY_PATH=/usr/lib64 podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
+                sh "LD_LIBRARY_PATH=/usr/lib64 podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} Esercitazioni/DockerHello/"
                 sh "LD_LIBRARY_PATH=/usr/lib64 podman tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
             }
         }
