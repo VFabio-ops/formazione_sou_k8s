@@ -21,15 +21,15 @@ pipeline {
         // 4. STAGE Build: costruisce l'immagine Docker
         stage('Build Image') {
             steps {
-                sh "LD_LIBRARY_PATH=/usr/lib64 podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} Esercitazioni/DockerHello/"
-                sh "LD_LIBRARY_PATH=/usr/lib64 podman tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
+                sh "podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} Esercitazioni/DockerHello/"
+                sh "podman tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
             }
         }
         stage('Push to DockerHub') {
             steps {
-                sh "LD_LIBRARY_PATH=/usr/lib64 podman login docker.io -u ${REGISTRY_CREDS_USR} --password-stdin <<< ${REGISTRY_CREDS_PSW}"
-                sh "LD_LIBRARY_PATH=/usr/lib64 podman push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                sh "LD_LIBRARY_PATH=/usr/lib64 podman push ${DOCKER_IMAGE}:latest"
+                sh "podman login docker.io -u ${REGISTRY_CREDS_USR} --password-stdin <<< ${REGISTRY_CREDS_PSW}"
+                sh "podman push ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                sh "podman push ${DOCKER_IMAGE}:latest"
             }
         }
     }
