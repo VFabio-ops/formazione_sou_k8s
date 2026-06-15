@@ -24,7 +24,6 @@ pipeline {
         // 4. STAGE Build: costruisce l'immagine Docker
         stage('Build Image') {
             steps {
-                sh "sudo dnf install podman"
                 sh "podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                 sh "podman tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
             }
@@ -33,8 +32,9 @@ pipeline {
         // 5. STAGE Push: autentica e carica su DockerHub
         stage('Push to DockerHub') {
             steps {
-                sh "echo ${REGISTRY_CREDS_PSW} | podman login -u ${REGISTRY_CREDS_USR} --password-stdin"
+                sh "echo ${REGISTRY_CREDS_PSW} | podman login docker.io -u ${REGISTRY_CREDS_USR} --password-stdin"
                 sh "podman push ${DOCKER_IMAGE}:${DOCKER_TAG}"
+                sh "podman push ${DOCKER_IMAGE}:latest"
             }
         }
 
