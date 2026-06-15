@@ -24,6 +24,7 @@ pipeline {
         // 4. STAGE Build: costruisce l'immagine Docker
         stage('Build Image') {
             steps {
+                sh "sudo dnf install podman"
                 sh "podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} ."
                 sh "podman tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
             }
