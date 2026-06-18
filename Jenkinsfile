@@ -12,13 +12,6 @@ pipeline {
         REGISTRY_CREDS = credentials('dockerhub-credentials')  // ID credenziale Jenkins
     }
     stages {
-        // 3. STAGE Checkout: scarica il codice sorgente
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-        // 4. STAGE Build: costruisce l'immagine Docker
         stage('Build Image') {
             steps {
                 sh "podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} -f /Esercitazioni/DockerHello/"
@@ -33,7 +26,6 @@ pipeline {
             }
         }
     }
-    // 6. POST: cosa fare dopo, indipendentemente dall'esito
     post {
         always {
             sh "podman logout docker.io"
