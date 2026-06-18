@@ -21,7 +21,7 @@ pipeline {
         // 4. STAGE Build: costruisce l'immagine Docker
         stage('Build Image') {
             steps {
-                sh "podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} Esercitazioni/DockerHello/"
+                sh "podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} -f /Esercitazioni/DockerHello/"
                 sh "podman tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
             }
         }
