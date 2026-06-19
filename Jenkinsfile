@@ -20,7 +20,7 @@ pipeline {
                 script {
                     def date = new Date()
                     sh "echo $date"
-                    if (data.getDay() == 0 || data.getDay() == 6) {
+                    if (date.getDay() == 0 || date.getDay() == 6) {
                     error "Can't build during Week-end!"
                     }
                 }
