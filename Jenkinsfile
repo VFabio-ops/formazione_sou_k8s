@@ -21,8 +21,8 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh "podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} . "
-                sh "podman tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
+                sh "sudo podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} . "
+                sh "sudo podman tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
             }
         }
         stage('Push to DockerHub') {
