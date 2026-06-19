@@ -41,7 +41,7 @@ pipeline {
         }
         stage('Run Podman in Podman') {
             steps {
-                sh "podman run --rm -d --name hell-world docker.io/fabioviscusi/jenkins-agent:latest"
+                sh "podman run --rm -d --name hell-world -p 8000:8000 docker.io/fabioviscusi/jenkins-agent:latest"
             }
         }
     }
