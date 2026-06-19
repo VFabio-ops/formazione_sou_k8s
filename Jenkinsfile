@@ -1,3 +1,4 @@
+import java.util.Date
 pipeline {
     // 1. AGENT: dove viene eseguita la pipeline
     //    'any' = usa qualsiasi agent disponibile
