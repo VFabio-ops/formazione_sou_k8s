@@ -5,9 +5,9 @@ USER root
 
 WORKDIR /app
 
-RUN --mount=type=cache,target=/root/.cache/pip pip install flask
-
 COPY . /app
+
+RUN --mount=type=cache,target=/root/.cache/pip pip install flask
 
 EXPOSE 8000
 
