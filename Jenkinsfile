@@ -21,7 +21,7 @@ pipeline {
         }
         stage('Build Image') {
             steps {
-                sh "cd Esercitazioni/DockerHello/ && ls && \
+                sh "ls && \
                 podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} . && \
                 podman tag ${DOCKER_IMAGE}:${DOCKER_TAG} ${DOCKER_IMAGE}:latest"
             }
