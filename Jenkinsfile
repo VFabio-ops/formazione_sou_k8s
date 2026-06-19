@@ -15,8 +15,14 @@ pipeline {
     }
     stages {
         stage('Checking Date'){
-            steps{
-                checkout scm 
+            steps {
+                script {
+                    def date = new Date()
+                    sh "echo $date"
+                    if (data.getDay() == 0 || data.getDay() == 6) {
+                    error "Can't build during Week-end!"
+                    }
+                }
             }
         }
         stage('Build Image') {
@@ -30,6 +36,11 @@ pipeline {
                 sh "podman login docker.io -u ${REGISTRY_CREDS_USR} --password-stdin <<< ${REGISTRY_CREDS_PSW}"
                 sh "podman push ${DOCKER_IMAGE}:${DOCKER_TAG}"
                 sh "podman push ${DOCKER_IMAGE}:latest"
+            }
+        }
+        stage('Run Podman in Podman') {
+            steps {
+                sh "podman run --rm -d --name hell-world docker.io/fabioviscusi/jenkins-agent:latest"
             }
         }
     }
