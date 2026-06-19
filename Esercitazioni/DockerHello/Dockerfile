@@ -5,7 +5,7 @@ USER root
 
 WORKDIR /app
 
-RUN pip install flask
+RUN --mount=type=cache,target=/root/.cache/pip pip install flask
 
 COPY . /app
 
