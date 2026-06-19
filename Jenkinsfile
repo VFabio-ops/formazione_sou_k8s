@@ -2,7 +2,9 @@ pipeline {
     // 1. AGENT: dove viene eseguita la pipeline
     //    'any' = usa qualsiasi agent disponibile
     //    puoi anche specificare: agent { label 'linux' } o agent { docker 'node:18' }
-    agent any // { label 'podman-agent-01' } 
+    agent { 
+        label 'podman-agent-01' 
+        } 
 
     // 2. ENVIRONMENT: variabili disponibili in tutta la pipeline
     //    withCredentials recupera le credenziali salvate in Jenkins
