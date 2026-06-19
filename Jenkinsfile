@@ -14,11 +14,6 @@ pipeline {
         REGISTRY_CREDS = credentials('dockerhub-credentials')  // ID credenziale Jenkins
     }
     stages {
-        stage('Checkout SCM'){
-            steps{
-                checkout scm 
-            }
-        }
         stage('Build Image') {
             steps {
                 sh "podman build -t ${DOCKER_IMAGE}:${DOCKER_TAG} . "
