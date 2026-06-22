@@ -1,0 +1,20 @@
+replicaCount: 2
+
+image:
+  repository: fabioviscusi/hello-world
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+containerPort: 8000
+
+service: 
+  type: ClusterIP
+  port: 80
+
+ingress:
+  enabled: false
+  hosts:
+    - host: flask-app-example.local
+      paths:
+        - path: /
+          pathType: Prefix
