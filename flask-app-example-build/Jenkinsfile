@@ -35,7 +35,6 @@ pipeline {
                         echo "Siamo sul tag: ${tag}"
                     } else {
                         echo "Non c'è alcun tag"
-                        }
                     }
                 }
             }
@@ -80,3 +79,4 @@ pipeline {
             echo "Pipeline fallita. Controlla i log sopra."
         }
     }
+}
