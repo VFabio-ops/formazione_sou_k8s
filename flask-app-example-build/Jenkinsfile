@@ -46,6 +46,7 @@ pipeline {
                 sh 'git describe --tags --exact-match HEAD || echo "HEAD non corrisponde a nessun tag"'
                 sh 'git tag -l'
                 sh 'git rev-parse HEAD'
+                sh 'git rev-parse v0.1.0'
             }
         }
         stage('Build Image') {
