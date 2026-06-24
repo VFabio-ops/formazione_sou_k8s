@@ -23,5 +23,13 @@ pipeline {
                 sh 'ls -la charts/flask-app-example'
             }
         }
+
+        stage('Deploy con Helm') {
+            steps {
+                withCredentials([file(credentialsId: 'kubeconfig-formazione-sou', variable: 'KUBECONFIG')]) {
+                    sh 'helm upgrade --install flask-app-example charts/flask-app-example --namespace formazione-sou --set image.tag=${params.IMAGE_TAG}'
+                }
+            }
+        }
     }
 }
