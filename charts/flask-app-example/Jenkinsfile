@@ -5,9 +5,9 @@ pipeline {
 
     parameters {
         string(
-            name: "IMAGE_TAG"
-            defaultValue: "latest"
-            description: "tag dell\'immagine Docker"
+            name: 'IMAGE_TAG',
+            defaultValue: 'latest',
+            description: 'tag dell\'immagine Docker'
         )
     }
 
