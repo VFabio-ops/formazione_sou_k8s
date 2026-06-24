@@ -26,6 +26,20 @@ pipeline {
                 }
             }
         }
+        stage('Check for tag') {
+            steps {
+                script {
+                    def isTag = sh(script: 'git describe --tags --exact-match HEAD', returnStdout: true) == 0
+                    if (isTag) {
+                        def tag = sh(script: 'git describe --tags --exact-match HEAD', returnStdout: true).trim()
+                        echo "Siamo sul tag: ${tag}"
+                    } else {
+                        echo "Non c'è alcun tag"
+                        }
+                    }
+                }
+            }
+        }
         stage('Debug variabili Git') {
             steps {
                 sh 'echo "GIT_BRANCH = $GIT_BRANCH"'
