@@ -29,7 +29,7 @@ pipeline {
         stage('Check for tag') {
             steps {
                 script {
-                    def isTag = sh(script: 'git describe --tags --exact-match HEAD', returnStdout: true) == 0
+                    def isTag = sh(script: 'git describe --tags --exact-match HEAD', returnStatus: true) == 0
                     if (isTag) {
                         def tag = sh(script: 'git describe --tags --exact-match HEAD', returnStdout: true).trim()
                         echo "Siamo sul tag: ${tag}"
