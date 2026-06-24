@@ -1,0 +1,27 @@
+pipeline {
+    agent {
+        label 'podman-agent-01'
+    }
+
+    parameters {
+        string(
+            name: 'IMAGE_TAG'
+            defaultValue: 'latest'
+            description: 'tag dell\'immagine Docker'
+        )
+    }
+
+    stages {
+        stage('Checkout chart') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Verifica file') {
+            steps {
+                sh 'ls -la charts/flask-app-example'
+            }
+        }
+    }
+}
