@@ -44,6 +44,8 @@ pipeline {
                 sh 'echo "GIT_BRANCH = $GIT_BRANCH"'
                 sh 'echo "GIT_COMMIT = $GIT_COMMIT"'
                 sh 'git describe --tags --exact-match HEAD || echo "HEAD non corrisponde a nessun tag"'
+                sh 'git tag -l'
+                sh 'git rev-parse HEAD'
             }
         }
         stage('Build Image') {
