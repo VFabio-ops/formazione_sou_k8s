@@ -50,7 +50,7 @@ pipeline {
                         def branch = env.GIT_BRANCH.replaceFirst('^origin/', '')
                         def shortSha = env.GIT_COMMIT.take(7)
 
-                        if (branch) == "main"{
+                        if (branch == "main") {
                             env.DOCKER_TAG = "latest"
                         } else {
                             env.DOCKER_TAG = "develop-${shortSha}"
