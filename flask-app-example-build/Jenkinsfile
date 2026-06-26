@@ -11,7 +11,7 @@ pipeline {
     //    withCredentials recupera le credenziali salvate in Jenkins
     environment {
         DOCKER_IMAGE   = "fabioviscusi/hello-world"
-        DOCKER_TAG     = "${BUILD_NUMBER}"   // variabile Jenkins automatica
+        // DOCKER_TAG     = "${BUILD_NUMBER}"   // variabile Jenkins automatica
         REGISTRY_CREDS = credentials('dockerhub-credentials')  // ID credenziale Jenkins
     }
     stages {
