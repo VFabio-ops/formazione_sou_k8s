@@ -52,7 +52,7 @@ pipeline {
 
                         if (branch == "main") {
                             env.DOCKER_TAG = "latest"
-                        } else if {
+                        } else if (branch == "develop") {
                             env.DOCKER_TAG = "develop-${shortSha}"
                         } else {
                             env.DOCKER_TAG = "${branch}-${shortSha}"
