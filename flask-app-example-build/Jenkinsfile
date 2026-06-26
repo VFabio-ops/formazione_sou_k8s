@@ -11,7 +11,6 @@ pipeline {
     //    withCredentials recupera le credenziali salvate in Jenkins
     environment {
         DOCKER_IMAGE   = "fabioviscusi/hello-world"
-        // DOCKER_TAG     = "${BUILD_NUMBER}"   // variabile Jenkins automatica
         REGISTRY_CREDS = credentials('dockerhub-credentials')  // ID credenziale Jenkins
     }
     stages {
@@ -39,7 +38,7 @@ pipeline {
                 }
             }
         }
-        stage('Debug variabili Git') {
+        stage('Checking for Branch or Tag') {
             steps {
                 script {
                     def isTag = sh(script: 'git describe --tags --exact-match HEAD', returnStatus: true) == 0
@@ -74,7 +73,6 @@ pipeline {
             steps {
                 sh "podman login docker.io -u ${REGISTRY_CREDS_USR} --password-stdin <<< ${REGISTRY_CREDS_PSW}"
                 sh "podman push ${DOCKER_IMAGE}:${DOCKER_TAG}"
-                sh "podman push ${DOCKER_IMAGE}:latest"
             }
         }
         stage('Run Podman in Podman') {
